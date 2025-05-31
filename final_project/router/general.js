@@ -30,21 +30,21 @@ public_users.post("/register", (req,res) => {
 });
 
 // Get the book list available in the shop
-public_users.get('/',function (req, res) {
-    return res.status(200).json(books);
+public_users.get('/',async function (req, res) {
+    return await res.status(200).json(books);
 });
 
 // Get book details based on ISBN
-public_users.get('/isbn/:isbn',function (req, res) {
+public_users.get('/isbn/:isbn',async function (req, res) {
     const isbn = req.params.isbn;
     if(isbn){
-        return res.status(200).json(books[isbn]);
+        return await res.status(200).json(books[isbn]);
     }
     return res.status(400).json({message: "Book not found"});
  });
   
 // Get book details based on author
-public_users.get('/author/:author',function (req, res) {
+public_users.get('/author/:author',async function (req, res) {
     const author = req.params.author;
     if(author){
         let targetBook = -1;
@@ -55,14 +55,14 @@ public_users.get('/author/:author',function (req, res) {
             }
         }
         if(targetBook != -1){
-         return res.status(200).json(books[targetBook]);
+         return await res.status(200).json(books[targetBook]);
         }
     }
     return res.status(400).json({message: "Book not found"});
 });
 
 // Get all books based on title
-public_users.get('/title/:title',function (req, res) {
+public_users.get('/title/:title',async function (req, res) {
     const title = req.params.title;
     if(title){
         let targetBook = -1;
@@ -72,7 +72,7 @@ public_users.get('/title/:title',function (req, res) {
             }
         }
         if(targetBook != -1){
-         return res.status(200).json(books[targetBook]);
+         return await res.status(200).json(books[targetBook]);
         }
     }
     return res.status(400).json({message: "Book not found"});
